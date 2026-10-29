@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recepción | Control de Toallas</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="topbar">
+    <strong>Recepción - Control de Toallas</strong>
+    <button class="secondary" data-action="logout">Salir</button>
+  </div>
+
+  <div class="container">
+    <div id="recepcionMsg" class="hidden"></div>
+
+    <div class="card">
+      <h2>Registrar huésped</h2>
+
+      <form id="newStayForm">
+        <div class="grid grid-2">
+          <div>
+            <label>Nombre del huésped</label>
+            <input type="text" id="guest_name" required>
+          </div>
+
+          <div>
+            <label>Número de habitación</label>
+            <input type="text" id="room_number" required>
+          </div>
+
+          <div>
+            <label>Código de tarjeta</label>
+            <input type="text" id="guest_barcode" inputmode="numeric" pattern="[0-9]{4,20}" placeholder="Escanea o escribe el código de la tarjeta" required>
+          </div>
+
+          <div>
+            <label>Cantidad de tarjetas</label>
+            <input type="number" id="cards_count" min="0" value="1" required>
+          </div>
+
+          <div>
+            <label>Límite de toallas</label>
+            <input type="number" id="towel_limit" min="0" value="5" required>
+          </div>
+
+          <div>
+            <label>Toallas iniciales asignadas</label>
+            <input type="number" id="initial_towels" min="0" value="0" required>
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <label>Comentario</label>
+          <textarea id="comment" rows="3"></textarea>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <button type="submit">Guardar huésped</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Huéspedes</h2>
+
+      <div class="toolbar">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, habitación o código">
+        <label style="display: flex; align-items: center; gap: 6px;">
+          <input type="checkbox" id="showAll" style="width: auto;">
+          Mostrar todos
+        </label>
+        <button class="secondary" data-action="reload">Recargar</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Habitación</th>
+            <th>Nombre</th>
+            <th>Código</th>
+            <th>Tarjetas</th>
+            <th>Límite</th>
+            <th>Tiene</th>
+            <th>Disponibles</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="staysBody"></tbody>
+      </table>
+    </div>
+
+    <div class="card hidden" id="stayDetail">
+      <h2>Detalle del huésped</h2>
+
+      <p>
+        <strong>Nombre:</strong> <span id="detailName"></span><br>
+        <strong>Habitación:</strong> <span id="detailRoom"></span><br>
+        <strong>Código:</strong> <span id="detailBarcode"></span><br>
+        <strong>Entrada:</strong> <span id="detailEntry"></span><br>
+        <strong>Salida:</strong> <span id="detailExit"></span><br>
+        <strong>Estado:</strong> <span id="detailStatus"></span><br>
+        <strong>Toallas actuales:</strong> <span id="detailCurrent"></span><br>
+        <strong>Disponibles:</strong> <span id="detailRemaining"></span>
+      </p>
+
+      <div class="grid grid-2">
+        <div>
+          <label>Nuevo límite de toallas</label>
+          <input type="number" id="detailLimit" min="0">
+        </div>
+
+        <div>
+          <label>Cantidad de tarjetas</label>
+          <input type="number" id="detailCards" min="0">
+        </div>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <label>Comentario</label>
+        <textarea id="detailComment" rows="3"></textarea>
+      </div>
+
+      <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <button id="saveStayBtn">Guardar cambios</button>
+        <button id="checkoutBtn" class="danger">Check-out</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/recepcion.js"></script>
+</body>
+</html>

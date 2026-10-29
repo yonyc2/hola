@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Control de Toallas</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card" id="loginCard" style="max-width: 430px; margin: 90px auto;">
+      <h1>Iniciar sesión</h1>
+
+      <form id="loginForm">
+        <label>Usuario</label>
+        <input type="text" id="username" autocomplete="username" required>
+
+        <label>Contraseña</label>
+        <input type="password" id="password" autocomplete="current-password" required>
+
+        <button type="submit">Entrar</button>
+      </form>
+
+      <div id="loginMsg" class="hidden"></div>
+    </div>
+  </div>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toallero | Control de Toallas</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="topbar">
+    <strong>Toallero - Control de Toallas</strong>
+    <button class="secondary" data-action="logout">Salir</button>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>Escanear tarjeta</h2>
+      <input type="text" id="scanInput" class="big-input" placeholder="Escanea el código de barras y presiona Enter">
+    </div>
+
+    <div id="toalleroMsg" class="hidden"></div>
+
+    <div class="card hidden" id="guestCard">
+      <h2>Datos del huésped</h2>
+
+      <p>
+        <strong>Nombre:</strong> <span id="tName"></span><br>
+        <strong>Habitación:</strong> <span id="tRoom"></span><br>
+        <strong>Código:</strong> <span id="tBarcode"></span><br>
+        <strong>Tarjetas:</strong> <span id="tCards"></span><br>
+        <strong>Entrada:</strong> <span id="tEntry"></span><br>
+        <strong>Salida:</strong> <span id="tExit"></span><br>
+        <strong>Estado:</strong> <span id="tStatus"></span><br>
+        <strong>Límite de toallas:</strong> <span id="tLimit"></span><br>
+        <strong>Toallas actuales:</strong> <span id="tCurrent"></span><br>
+        <strong>Disponibles para entregar:</strong> <span id="tRemaining"></span><br>
+        <strong>Comentario:</strong> <span id="tComment"></span>
+      </p>
+
+      <div class="toolbar">
+        <input type="number" id="qty" min="1" value="1" style="width: 110px;">
+        <button id="deliverBtn">Entregar toallas</button>
+        <button id="returnBtn" class="secondary">Devolver toallas</button>
+      </div>
+
+      <h3>Últimos movimientos</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha CDMX</th>
+            <th>Usuario</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody id="tMovs"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/toallero.js"></script>
+</body>
+</html>

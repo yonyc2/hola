@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Control de Toallas</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="topbar">
+    <strong>Administrador - Control de Toallas</strong>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button id="exportDbBtn" type="button">Exportar base de datos</button>
+      <button class="secondary" data-action="logout">Salir</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="adminMsg" class="hidden"></div>
+
+    <div class="card">
+      <h2>Crear usuario</h2>
+
+      <form id="userForm">
+        <div class="grid grid-2">
+          <div>
+            <label>Usuario</label>
+            <input type="text" id="username" required>
+          </div>
+
+          <div>
+            <label>Nombre completo</label>
+            <input type="text" id="full_name" required>
+          </div>
+
+          <div>
+            <label>Contraseña</label>
+            <input type="password" id="password" required>
+          </div>
+
+          <div>
+            <label>Rol</label>
+            <select id="role" required>
+              <option value="recepcion">Recepción</option>
+              <option value="toallero">Toallero</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top: 12px;">
+          <button type="submit">Crear usuario</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Usuarios</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="usersBody"></tbody>
+      </table>
+    </div>
+
+    <div class="card history-card">
+      <div class="history-head">
+        <div>
+          <h2>Historial</h2>
+          <div class="muted" id="historyCount">Cargando…</div>
+        </div>
+        <button id="loadHistoryBtn" type="button" class="secondary">&#8635; Recargar</button>
+      </div>
+
+      <div class="history-filters">
+        <div class="search-wrap">
+          <input type="search" id="historySearch" placeholder="Buscar usuario, huésped, habitación…" autocomplete="off">
+        </div>
+        <select id="historyAction" aria-label="Filtrar por acción">
+          <option value="">Todas las acciones</option>
+        </select>
+        <select id="historyLimit" aria-label="Cantidad de registros">
+          <option value="100">Últimos 100</option>
+          <option value="200" selected>Últimos 200</option>
+          <option value="500">Últimos 500</option>
+          <option value="1000">Últimos 1000</option>
+        </select>
+      </div>
+
+      <div class="history-scroll">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Usuario</th>
+              <th>Acción</th>
+              <th>Huésped</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

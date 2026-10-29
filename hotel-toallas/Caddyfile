@@ -1,0 +1,4 @@
+# Caddy obtiene y renueva el certificado HTTPS automáticamente
+{$DOMINIO} {
+	reverse_proxy app:3000
+}
